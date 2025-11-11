@@ -98,7 +98,7 @@ const FilterNavTwo = () => {
     return (
         <div className="max-w-[1440px] mx-auto px-8 py-6 relative text-white">
             {/* Enhanced Navigation with See More */}
-            <div className="relative">
+            <div className="relative px-6">
                 <nav className="flex items-center gap-4 mb-8 overflow-x-auto scrollbar-hide pb-2">
                     {features.slice(0, navItemsToShow).map((feat) => (
                         <div 

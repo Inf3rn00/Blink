@@ -1,9 +1,15 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function Header({ onOpenSignUp }) {
   const location = useLocation();
+  const navigate = useNavigate();
   const isDashboard = location.pathname.startsWith("/dashboard");
+
+  // Function to handle home button click
+  const handleHomeClick = () => {
+    navigate("/"); // Navigate to homepage
+  };
 
   return (
     <>
@@ -12,14 +18,33 @@ export function Header({ onOpenSignUp }) {
           {/* Navigation Menu */}
           <nav className="hidden md:flex gap-4 flex-shrink-0">
             {[
-              { icon: "/icons/heroSection/Home.svg", alt: "home" },
-              { icon: "/icons/heroSection/Sports.svg", alt: "sports", label: "Sports" },
-              { icon: "/icons/heroSection/Casino.svg", alt: "casino", label: "Games" },
-              { icon: "/icons/heroSection/More.svg", alt: "more", label: "More" },
+              { 
+                icon: "/icons/heroSection/Home.svg", 
+                alt: "home", 
+                onClick: handleHomeClick // Add click handler for home
+              },
+              { 
+                icon: "/icons/heroSection/Sports.svg", 
+                alt: "sports", 
+                label: "Sports" 
+              },
+              { 
+                icon: "/icons/heroSection/Casino.svg", 
+                alt: "casino", 
+                label: "Games" 
+              },
+              { 
+                icon: "/icons/heroSection/More.svg", 
+                alt: "more", 
+                label: "More" 
+              },
             ].map((item) => (
               <div
                 key={item.alt}
-                className="bg-white/15 rounded-lg p-2 flex items-center gap-2 cursor-pointer hover:scale-105"
+                onClick={item.onClick}
+                className={`bg-white/15 rounded-lg p-2 flex items-center gap-2 cursor-pointer hover:scale-105 ${
+                  item.onClick ? "hover:bg-white/25" : ""
+                }`}
               >
                 <img src={item.icon} alt={item.alt} className="w-6 h-6" />
                 {item.label && <p>{item.label}</p>}
